@@ -1,3 +1,7 @@
+# 実行
+if __name__ == '__main__':
+    app.run()
+
 from flask import Flask
 
 # インスタンス作成
