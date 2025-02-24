@@ -18,6 +18,13 @@ def item_list():
 def item_detail(id):
     return render_template('detail.html', show_id=id)
 
+# render_templateで値を渡す
+@app.route("/multiple")
+def show_jinja_multiple():
+    word1 = "テンプレートエンジン"
+    word2 = ("神社")
+    return render_template('jinja/show1.html', temp= word1, jinja = word2)
+
 # 実行
 if __name__ == '__main__':
     app.run()
