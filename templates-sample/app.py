@@ -14,9 +14,9 @@ def item_list():
     return render_template('list.html')
 
 # 詳細
-@app.route('/detail')
-def item_detail():
-    return render_template('detail.html')
+@app.route('/detail/<int:id>')
+def item_detail(id):
+    return render_template('detail.html', show_id=id)
 
 # 実行
 if __name__ == '__main__':
