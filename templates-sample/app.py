@@ -34,6 +34,12 @@ def show_jinja_dict():
     }
     return render_template('jinja/show2.html', key = words)
 
+# render_templateで値を渡す「リスト型」
+@app.route("/list2")
+def show_jinja_list():
+    hero_list = ['桃太郎', '金太郎', '浦島太郎']
+    return render_template('jinja/show3.html', users = hero_list)
+
 # 実行
 if __name__ == '__main__':
     app.run()
