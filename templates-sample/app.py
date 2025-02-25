@@ -55,6 +55,23 @@ def show_jinja_class():
     hana = Hero('花咲か爺さん', 99)
     return render_template('jinja/show4.html', user = hana)
 
+# ＿＿＿＿＿＿＿＿＿＿＿ここから制御文＿＿＿＿＿＿＿＿＿＿＿＿＿
+# 「商品」クラス
+class Item:
+    # コンストラクタ
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+    # 表示用関数
+    def __str__(self):
+        return f'商品ID：{self.id} 商品名：{self.name}'
+
+    # 繰り返し
+    @app.route("/for_list")
+    def show_for_list():
+        item_list = [Item(1, "ダンゴ"), Item(2, "肉まん"), Item(3, "どら焼き")]
+        return render_template('for_list.html', items = item_list)
+
 # 実行
 if __name__ == '__main__':
     app.run()
