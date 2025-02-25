@@ -40,6 +40,21 @@ def show_jinja_list():
     hero_list = ['桃太郎', '金太郎', '浦島太郎']
     return render_template('jinja/show3.html', users = hero_list)
 
+# render_templateで値を渡す「クラス」
+class Hero:
+    # コンストラクタ
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    # 表示用関数
+    def __str__(self):
+        return f'名前：{ self.name} 年齢：{self.age}'
+
+@app.route("/class")
+def show_jinja_class():
+    hana = Hero('花咲か爺さん', 99)
+    return render_template('jinja/show4.html', user = hana)
+
 # 実行
 if __name__ == '__main__':
     app.run()
