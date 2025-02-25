@@ -72,6 +72,12 @@ class Item:
         item_list = [Item(1, "ダンゴ"), Item(2, "肉まん"), Item(3, "どら焼き")]
         return render_template('for_list.html', items = item_list)
 
+    # 条件分岐
+    @app.route('/if_detail/<int:id>')
+    def show_if_detail(id):
+        item_list = [Item(1, "ダンゴ"), Item(2, "肉まん"), Item(3, "どら焼き")]
+        return render_template('if_detail.html', show_id=id, items = item_list)
+
 # 実行
 if __name__ == '__main__':
     app.run()
