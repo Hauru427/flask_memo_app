@@ -104,6 +104,21 @@ class Item:
         hero_list = [momo, kinta, ura, kagu, kasa]
         return render_template('filter/filter_list.html', heroes = hero_list)
 
+    # カスタムフィルター
+    @app.template_filter('truncate')
+    def str_truncate(value, length=10):
+        if len(value) > length:
+            return value[:length] + "..."
+        else:
+            return value
+
+    # カスタムフィルターの実行
+    @app.route("/filter3")
+    def show_my_filter():
+        word = '寿限無'
+        long_word = 'じゅげむじゅげむごこうのすりきれ'
+        return render_template('filter/my_filter.html', show_word1=word, show_word2=long_word)
+
 # 実行
 if __name__ == '__main__':
     app.run()
