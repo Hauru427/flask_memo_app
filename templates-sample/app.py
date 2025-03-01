@@ -78,6 +78,14 @@ class Item:
         item_list = [Item(1, "ダンゴ"), Item(2, "肉まん"), Item(3, "どら焼き")]
         return render_template('if_detail.html', show_id=id, items = item_list)
 
+    # 条件分岐2
+    @app.route('/if')
+    @app.route('/if/<target>')
+    def show_jinja_if(target="colorless"):
+        print(target)
+        return render_template('jinja/if_else.html', color=target)
+
+
 # 実行
 if __name__ == '__main__':
     app.run()
