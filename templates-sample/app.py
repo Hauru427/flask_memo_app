@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from werkzeug.exceptions import NotFound
 
 # インスタンス作成
 app = Flask(__name__)
@@ -118,6 +119,13 @@ class Item:
         word = '寿限無'
         long_word = 'じゅげむじゅげむごこうのすりきれ'
         return render_template('filter/my_filter.html', show_word1=word, show_word2=long_word)
+
+    # エラーハンドリング
+    @app.errorhandler(NotFound)
+    def show_404_page(error):
+        msg = error.description
+        print('エラー内容:',msg)
+        return render_template('errors/404.html'), 404
 
 # 実行
 if __name__ == '__main__':
