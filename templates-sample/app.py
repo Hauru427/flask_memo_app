@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from werkzeug.exceptions import NotFound
 
 # インスタンス作成
 app = Flask(__name__)
@@ -85,6 +86,46 @@ class Item:
         print(target)
         return render_template('jinja/if_else.html', color=target)
 
+    # フィルター；文全体
+    @app.route("/filter")
+    def show_filter_block():
+        word = "pen"
+        return render_template('filter/block.html', show_word =word)
+
+    # フィルター：特定の変数
+    @app.route("/filter2")
+    def show_filter_variable():
+        # クラスを作成
+        momo = Hero('桃太郎', 25)
+        kinta = Hero('金太郎', 35)
+        ura = Hero('浦島太郎', 45)
+        kagu = Hero('かぐや姫', 55)
+        kasa = Hero('笠地蔵', 65)
+        # リストに詰める
+        hero_list = [momo, kinta, ura, kagu, kasa]
+        return render_template('filter/filter_list.html', heroes = hero_list)
+
+    # カスタムフィルター
+    @app.template_filter('truncate')
+    def str_truncate(value, length=10):
+        if len(value) > length:
+            return value[:length] + "..."
+        else:
+            return value
+
+    # カスタムフィルターの実行
+    @app.route("/filter3")
+    def show_my_filter():
+        word = '寿限無'
+        long_word = 'じゅげむじゅげむごこうのすりきれ'
+        return render_template('filter/my_filter.html', show_word1=word, show_word2=long_word)
+
+    # エラーハンドリング
+    @app.errorhandler(NotFound)
+    def show_404_page(error):
+        msg = error.description
+        print('エラー内容:',msg)
+        return render_template('errors/404.html'), 404
 
 # 実行
 if __name__ == '__main__':
