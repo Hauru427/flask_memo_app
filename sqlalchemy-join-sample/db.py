@@ -1,5 +1,7 @@
 import os
-from sqlalchemy import  create_engine, Column, Integer, String
+
+from requests import session
+from sqlalchemy import create_engine, Column, Integer, String, outerjoin
 # from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, declarative_base
 
@@ -83,3 +85,11 @@ join_3tables_all = session.query(Shop, Item.item_name, Stock.stock).join\
 
 for row in join_3tables_all:
     print(f'店：{row.Shop.shop_name} -> 商品名：{row.item_name} -> 在庫数：{row.stock}')
+
+print('▪️' * 100)
+
+print('▪️：外部結合')
+outerjoin_2tables_all = session.query(Item, Stock.stock).outerjoin(Stock, Item.item_id== Stock.item_id).all()
+
+for row in outerjoin_2tables_all:
+    print(f'商品名：{row.Item.item_name} -> 在庫数：{row.stock}')
